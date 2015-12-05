@@ -40,6 +40,8 @@ public class PatientInfo extends JFrame {
 	private JLabel lblRefered;
 	private JTextField txtRef;
 
+	//asfasfasfafs;
+	
 	/**
 	 * Launch the application.
 	 */
