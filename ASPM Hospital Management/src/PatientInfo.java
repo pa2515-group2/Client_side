@@ -1,6 +1,8 @@
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -39,8 +41,6 @@ public class PatientInfo extends JFrame {
 	private JTextField txtO;
 	private JLabel lblRefered;
 	private JTextField txtRef;
-
-	//asfasfasfafs;
 	
 	/**
 	 * Launch the application.
@@ -74,6 +74,19 @@ public class PatientInfo extends JFrame {
 		txtFN.setBounds(167, 58, 236, 39);
 		contentPane.add(txtFN);
 		txtFN.setColumns(10);
+		
+		// prevent numerical values
+		txtFN.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (((c < 'A') || (c > 'Z')) && ((c < 'a') || (c > 'z'))
+						&& (c != KeyEvent.VK_BACK_SPACE)) {
+					e.consume();
+					getToolkit().beep();
+				}
+			}
+		});
+		
 
 		JButton btnSend = new JButton("Send");
 		btnSend.setBounds(893, 791, 171, 41);
@@ -92,6 +105,19 @@ public class PatientInfo extends JFrame {
 		txtLN.setColumns(10);
 		txtLN.setBounds(624, 58, 236, 39);
 		contentPane.add(txtLN);
+		txtLN.setTransferHandler(null); // disable copy&paste actions
+		
+		// prevent numerical values
+		txtLN.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (((c < 'A') || (c > 'Z')) && ((c < 'a') || (c > 'z'))
+						&& (c != KeyEvent.VK_BACK_SPACE)) {
+					e.consume();
+					getToolkit().beep();
+				}
+			}
+		});
 
 		lblBirthDate = new JLabel("Birth Date");
 		lblBirthDate.setBounds(26, 149, 154, 33);
@@ -106,6 +132,7 @@ public class PatientInfo extends JFrame {
 		txtEid.setColumns(10);
 		txtEid.setBounds(157, 386, 523, 39);
 		contentPane.add(txtEid);
+		txtEid.setTransferHandler(null); // disable copy&paste actions
 
 		lblAddress = new JLabel("Address");
 		lblAddress.setBounds(26, 457, 547, 33);
@@ -140,11 +167,35 @@ public class PatientInfo extends JFrame {
 		txtH.setBounds(141, 229, 50, 40);
 		contentPane.add(txtH);
 		txtH.setColumns(10);
+		txtH.setTransferHandler(null); // disable copy&paste actions
+		
+		// prevent text values
+		txtH.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (((c < '0') || (c > '9')) && (c != KeyEvent.VK_BACK_SPACE)) {
+					e.consume();
+					getToolkit().beep();
+				}
+			}
+		});
 
 		txtW = new JTextField();
 		txtW.setColumns(10);
 		txtW.setBounds(449, 226, 50, 40);
 		contentPane.add(txtW);
+		txtW.setTransferHandler(null); // disable copy&paste actions
+		
+		// prevent text values
+		txtW.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (((c < '0') || (c > '9')) && (c != KeyEvent.VK_BACK_SPACE)) {
+					e.consume();
+					getToolkit().beep();
+				}
+			}
+		});
 
 		JLabel lblWeight = new JLabel("Weight");
 		lblWeight.setBounds(308, 229, 115, 33);
@@ -176,6 +227,20 @@ public class PatientInfo extends JFrame {
 		txtO.setColumns(10);
 		txtO.setBounds(851, 386, 236, 39);
 		contentPane.add(txtO);
+		txtO.setTransferHandler(null); // disable copy&paste actions
+		
+		// prevent numerical values
+		txtO.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (((c < 'A') || (c > 'Z')) && ((c < 'a') || (c > 'z'))
+						&& (c != KeyEvent.VK_BACK_SPACE)) {
+					e.consume();
+					getToolkit().beep();
+				}
+			}
+		});
+		
 
 		JLabel lblMaritalStatus = new JLabel("Marital Status");
 		lblMaritalStatus.setBounds(470, 319, 186, 33);
@@ -195,6 +260,19 @@ public class PatientInfo extends JFrame {
 		txtRef.setColumns(10);
 		txtRef.setBounds(167, 319, 236, 39);
 		contentPane.add(txtRef);
+		txtRef.setTransferHandler(null); // disable copy&paste actions
+		
+		// prevent numerical values
+		txtRef.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (((c < 'A') || (c > 'Z')) && ((c < 'a') || (c > 'z'))
+						&& (c != KeyEvent.VK_BACK_SPACE)) {
+					e.consume();
+					getToolkit().beep();
+				}
+			}
+		});
 
 		final JTextArea txtaAdd2 = new JTextArea();
 		txtaAdd2.setBounds(672, 468, 390, 250);
