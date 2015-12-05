@@ -40,7 +40,7 @@ public class Doctors_info extends JFrame {
 	public String[] profession = { "Surgeon", "Neurologist", "Physician",
 			"Dermatologist", "Gynecologist", "Radiologist" };
 	public String[] gender = { "Male", "Female" };
-	public String firstname, lastname, qualification, experience, schedule;
+	public String firstname, lastname, qualification, experience, age;
 
 	private static JTextField textField;
 	private static JTextField textField_1;
@@ -102,8 +102,8 @@ public class Doctors_info extends JFrame {
 								"Enter the missing informations!");
 
 					else {
-						schedule = dateformat.format(d);
-						System.out.println(schedule);
+						age = dateformat.format(d);
+						System.out.println(age);
 
 						// Encoding values into a JSON object
 						JSONObject obj = new JSONObject();
@@ -112,7 +112,7 @@ public class Doctors_info extends JFrame {
 						obj.put("last_name", lastname);
 						obj.put("qualification", qualification);
 						obj.put("experience", experience);
-						obj.put("schedule", schedule);
+						obj.put("age", age);
 						obj.put("gender", comboBox_1.getSelectedItem()
 								.toString());
 						obj.put("profession", comboBox.getSelectedItem()
@@ -259,8 +259,8 @@ public class Doctors_info extends JFrame {
 		dateChooser.setBounds(114, 163, 91, 20);
 		contentPane.add(dateChooser);
 
-		JLabel lblSchedule = new JLabel("Schedule");
-		lblSchedule.setBounds(31, 169, 46, 14);
-		contentPane.add(lblSchedule);
+		JLabel lblage = new JLabel("Age");
+		lblage.setBounds(31, 169, 46, 14);
+		contentPane.add(lblage);
 	}
 }

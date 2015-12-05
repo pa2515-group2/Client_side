@@ -16,6 +16,7 @@ import org.json.simple.JSONObject;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
@@ -41,22 +42,19 @@ public class PatientInfo extends JFrame {
 	private JTextField txtO;
 	private JLabel lblRefered;
 	private JTextField txtRef;
-	
+	public String age;
+	JDateChooser dateChooser = new JDateChooser();
+	private email_validator eval;
+
 	/**
 	 * Launch the application.
 	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PatientInfo frame = new PatientInfo();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
+	/*
+	 * public static void main(String[] args) { EventQueue.invokeLater(new
+	 * Runnable() { public void run() { try { PatientInfo frame = new
+	 * PatientInfo(); frame.setVisible(true); } catch (Exception e) {
+	 * e.printStackTrace(); } } }); }
+	 */
 
 	/**
 	 * Create the frame.
@@ -74,7 +72,7 @@ public class PatientInfo extends JFrame {
 		txtFN.setBounds(167, 58, 236, 39);
 		contentPane.add(txtFN);
 		txtFN.setColumns(10);
-		
+
 		// prevent numerical values
 		txtFN.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
@@ -86,7 +84,6 @@ public class PatientInfo extends JFrame {
 				}
 			}
 		});
-		
 
 		JButton btnSend = new JButton("Send");
 		btnSend.setBounds(893, 791, 171, 41);
@@ -106,7 +103,7 @@ public class PatientInfo extends JFrame {
 		txtLN.setBounds(624, 58, 236, 39);
 		contentPane.add(txtLN);
 		txtLN.setTransferHandler(null); // disable copy&paste actions
-		
+
 		// prevent numerical values
 		txtLN.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
@@ -147,6 +144,7 @@ public class PatientInfo extends JFrame {
 		rdbtnMale.setActionCommand("Male");
 		rdbtnMale.setBounds(505, 149, 121, 41);
 		contentPane.add(rdbtnMale);
+		rdbtnMale.doClick();
 
 		final JRadioButton rdbtnFemale = new JRadioButton("Female");
 		rdbtnFemale.setActionCommand("Female");
@@ -168,7 +166,7 @@ public class PatientInfo extends JFrame {
 		contentPane.add(txtH);
 		txtH.setColumns(10);
 		txtH.setTransferHandler(null); // disable copy&paste actions
-		
+
 		// prevent text values
 		txtH.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
@@ -185,7 +183,7 @@ public class PatientInfo extends JFrame {
 		txtW.setBounds(449, 226, 50, 40);
 		contentPane.add(txtW);
 		txtW.setTransferHandler(null); // disable copy&paste actions
-		
+
 		// prevent text values
 		txtW.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
@@ -213,8 +211,9 @@ public class PatientInfo extends JFrame {
 		lblKgs.setBounds(505, 232, 50, 33);
 		contentPane.add(lblKgs);
 
-		final JComboBox comboBldGrp = new JComboBox(new String[] { "O +ve", "O -ve",
-				"A +ve", "A -ve", "B +ve", "B -ve", "AB +ve", "AB -ve" });
+		final JComboBox comboBldGrp = new JComboBox(
+				new String[] { "O +ve", "O -ve", "A +ve", "A -ve", "B +ve",
+						"B -ve", "AB +ve", "AB -ve" });
 		comboBldGrp.setBounds(778, 232, 111, 39);
 		contentPane.add(comboBldGrp);
 
@@ -228,7 +227,7 @@ public class PatientInfo extends JFrame {
 		txtO.setBounds(851, 386, 236, 39);
 		contentPane.add(txtO);
 		txtO.setTransferHandler(null); // disable copy&paste actions
-		
+
 		// prevent numerical values
 		txtO.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
@@ -240,13 +239,13 @@ public class PatientInfo extends JFrame {
 				}
 			}
 		});
-		
 
 		JLabel lblMaritalStatus = new JLabel("Marital Status");
 		lblMaritalStatus.setBounds(470, 319, 186, 33);
 		contentPane.add(lblMaritalStatus);
 
-		final JComboBox comboMarSts = new JComboBox(new String[] { "yes", "no" });
+		final JComboBox comboMarSts = new JComboBox(
+				new String[] { "yes", "no" });
 		comboMarSts.setBounds(647, 316, 111, 39);
 		comboMarSts.setEnabled(true);
 		contentPane.add(comboMarSts);
@@ -261,7 +260,7 @@ public class PatientInfo extends JFrame {
 		txtRef.setBounds(167, 319, 236, 39);
 		contentPane.add(txtRef);
 		txtRef.setTransferHandler(null); // disable copy&paste actions
-		
+
 		// prevent numerical values
 		txtRef.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
@@ -282,7 +281,6 @@ public class PatientInfo extends JFrame {
 		label.setBounds(557, 457, 547, 33);
 		contentPane.add(label);
 
-		final JDateChooser dateChooser = new JDateChooser();
 		dateChooser.setBounds(177, 149, 181, 39);
 		contentPane.add(dateChooser);
 
@@ -299,40 +297,80 @@ public class PatientInfo extends JFrame {
 				txtaAdd1.setText("");
 				txtaAdd2.setText("");
 				rdbtnMale.doClick();
+				dateChooser.setDate(null);
 				comboBldGrp.setSelectedIndex(1);
-				SimpleDateFormat dateformat = new SimpleDateFormat("dd/MM/yyyy");
-				Date d = dateChooser.getDate();
-				System.out.println("date :" + dateformat.format(d));
-				System.out.println("blggrp :"
-						+ comboBldGrp.getSelectedItem().toString());
 			}
 		});
 		btnReset.setBounds(689, 791, 171, 41);
 		contentPane.add(btnReset);
 
 		btnSend.addActionListener(new ActionListener() {
-
 			@SuppressWarnings("unchecked")
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				JSONObject obj = new JSONObject();
-				obj.put("firstname", txtFN.getText());
-				obj.put("lastname", txtLN.getText());
-				obj.put("Bdate", dateChooser.getDate().toString());
-				if (rdbtnMale.isSelected())
-					obj.put("gender", rdbtnMale.getActionCommand());
-				else if (rdbtnFemale.isSelected())
-					obj.put("gender", rdbtnMale.getActionCommand());
-				obj.put("height", txtH.getText());
-				obj.put("weight", txtW.getText());
-				obj.put("blgGrp", comboBldGrp.getSelectedItem().toString());
-				obj.put("refBy", txtRef.getText());
-				obj.put("mStatus", comboMarSts.getSelectedItem().toString());
-				obj.put("eid", txtEid.getText());
-				obj.put("occupation", txtO.getText());
-				obj.put("Address", txtaAdd1.getText());
 
-				System.out.println(obj);
+				try {
+					eval = new email_validator();
+
+					SimpleDateFormat dateformat = new SimpleDateFormat(
+							"dd/MM/yyyy");
+					Date d = dateChooser.getDate();
+
+					// If date is not given throw an exception to the user
+					if (d == null || txtFN.getText().equals("")
+							|| txtLN.getText().equals("")
+							|| txtH.getText().equals("")
+							|| txtW.getText().equals("")
+							|| txtO.getText().equals("")
+							|| txtaAdd1.getText().equals("")
+							|| txtRef.getText().equals("")
+							|| txtEid.getText().equals(""))
+						throw new RuntimeException(
+								"Enter the missing informations!");
+
+					else {
+
+						boolean valid = eval.validate(txtEid.getText());
+
+						if (valid) {
+
+							age = dateformat.format(d);
+							System.out.println(age);
+
+							JSONObject obj = new JSONObject();
+							obj.put("firstname", txtFN.getText());
+							obj.put("lastname", txtLN.getText());
+							obj.put("Bdate", age);
+							if (rdbtnMale.isSelected())
+								obj.put("gender", rdbtnMale.getActionCommand());
+							else if (rdbtnFemale.isSelected())
+								obj.put("gender", rdbtnMale.getActionCommand());
+							obj.put("height", txtH.getText());
+							obj.put("weight", txtW.getText());
+							obj.put("blgGrp", comboBldGrp.getSelectedItem()
+									.toString());
+							obj.put("refBy", txtRef.getText());
+							obj.put("mStatus", comboMarSts.getSelectedItem()
+									.toString());
+							obj.put("eid", txtEid.getText());
+							obj.put("occupation", txtO.getText());
+							obj.put("Address", txtaAdd1.getText());
+
+							System.out.println(obj);
+						} else {
+							throw new RuntimeException(
+									"E-mail address is not right!");
+						}
+					}
+				}
+
+				catch (RuntimeException e5) {
+					JOptionPane.showMessageDialog(null, e5, "Error",
+							JOptionPane.ERROR_MESSAGE);
+
+				} catch (Exception e1) {
+					System.out.println("Exception caught:" + e1);
+				}
 
 			}
 
