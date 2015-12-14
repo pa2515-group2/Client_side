@@ -46,20 +46,8 @@ public class PatientInfo extends JFrame {
 	JDateChooser dateChooser = new JDateChooser();
 	private email_validator eval;
 
-	/**
-	 * Launch the application.
-	 */
-	/*
-	 * public static void main(String[] args) { EventQueue.invokeLater(new
-	 * Runnable() { public void run() { try { PatientInfo frame = new
-	 * PatientInfo(); frame.setVisible(true); } catch (Exception e) {
-	 * e.printStackTrace(); } } }); }
-	 */
-
-	/**
-	 * Create the frame.
-	 */
 	public PatientInfo() {
+		final ServerCode sc=new ServerCode();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1170, 977);
 		contentPane = new JPanel();
@@ -77,8 +65,7 @@ public class PatientInfo extends JFrame {
 		txtFN.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
 				char c = e.getKeyChar();
-				if (((c < 'A') || (c > 'Z')) && ((c < 'a') || (c > 'z'))
-						&& (c != KeyEvent.VK_BACK_SPACE)) {
+				if (((c < 'A') || (c > 'Z')) && ((c < 'a') || (c > 'z')) && (c != KeyEvent.VK_BACK_SPACE)) {
 					e.consume();
 					getToolkit().beep();
 				}
@@ -108,8 +95,7 @@ public class PatientInfo extends JFrame {
 		txtLN.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
 				char c = e.getKeyChar();
-				if (((c < 'A') || (c > 'Z')) && ((c < 'a') || (c > 'z'))
-						&& (c != KeyEvent.VK_BACK_SPACE)) {
+				if (((c < 'A') || (c > 'Z')) && ((c < 'a') || (c > 'z')) && (c != KeyEvent.VK_BACK_SPACE)) {
 					e.consume();
 					getToolkit().beep();
 				}
@@ -212,8 +198,7 @@ public class PatientInfo extends JFrame {
 		contentPane.add(lblKgs);
 
 		final JComboBox comboBldGrp = new JComboBox(
-				new String[] { "O +ve", "O -ve", "A +ve", "A -ve", "B +ve",
-						"B -ve", "AB +ve", "AB -ve" });
+				new String[] { "O +ve", "O -ve", "A +ve", "A -ve", "B +ve", "B -ve", "AB +ve", "AB -ve" });
 		comboBldGrp.setBounds(778, 232, 111, 39);
 		contentPane.add(comboBldGrp);
 
@@ -232,8 +217,7 @@ public class PatientInfo extends JFrame {
 		txtO.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
 				char c = e.getKeyChar();
-				if (((c < 'A') || (c > 'Z')) && ((c < 'a') || (c > 'z'))
-						&& (c != KeyEvent.VK_BACK_SPACE)) {
+				if (((c < 'A') || (c > 'Z')) && ((c < 'a') || (c > 'z')) && (c != KeyEvent.VK_BACK_SPACE)) {
 					e.consume();
 					getToolkit().beep();
 				}
@@ -244,8 +228,7 @@ public class PatientInfo extends JFrame {
 		lblMaritalStatus.setBounds(470, 319, 186, 33);
 		contentPane.add(lblMaritalStatus);
 
-		final JComboBox comboMarSts = new JComboBox(
-				new String[] { "yes", "no" });
+		final JComboBox comboMarSts = new JComboBox(new String[] { "yes", "no" });
 		comboMarSts.setBounds(647, 316, 111, 39);
 		comboMarSts.setEnabled(true);
 		contentPane.add(comboMarSts);
@@ -265,8 +248,7 @@ public class PatientInfo extends JFrame {
 		txtRef.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
 				char c = e.getKeyChar();
-				if (((c < 'A') || (c > 'Z')) && ((c < 'a') || (c > 'z'))
-						&& (c != KeyEvent.VK_BACK_SPACE)) {
+				if (((c < 'A') || (c > 'Z')) && ((c < 'a') || (c > 'z')) && (c != KeyEvent.VK_BACK_SPACE)) {
 					e.consume();
 					getToolkit().beep();
 				}
@@ -312,21 +294,15 @@ public class PatientInfo extends JFrame {
 				try {
 					eval = new email_validator();
 
-					SimpleDateFormat dateformat = new SimpleDateFormat(
-							"dd/MM/yyyy");
+					SimpleDateFormat dateformat = new SimpleDateFormat("dd/MM/yyyy");
 					Date d = dateChooser.getDate();
 
 					// If date is not given throw an exception to the user
-					if (d == null || txtFN.getText().equals("")
-							|| txtLN.getText().equals("")
-							|| txtH.getText().equals("")
-							|| txtW.getText().equals("")
-							|| txtO.getText().equals("")
-							|| txtaAdd1.getText().equals("")
-							|| txtRef.getText().equals("")
+					if (d == null || txtFN.getText().equals("") || txtLN.getText().equals("")
+							|| txtH.getText().equals("") || txtW.getText().equals("") || txtO.getText().equals("")
+							|| txtaAdd1.getText().equals("") || txtRef.getText().equals("")
 							|| txtEid.getText().equals(""))
-						throw new RuntimeException(
-								"Enter the missing informations!");
+						throw new RuntimeException("Enter the missing informations!");
 
 					else {
 
@@ -347,26 +323,23 @@ public class PatientInfo extends JFrame {
 								obj.put("gender", rdbtnMale.getActionCommand());
 							obj.put("height", txtH.getText());
 							obj.put("weight", txtW.getText());
-							obj.put("blgGrp", comboBldGrp.getSelectedItem()
-									.toString());
+							obj.put("blgGrp", comboBldGrp.getSelectedItem().toString());
 							obj.put("refBy", txtRef.getText());
-							obj.put("mStatus", comboMarSts.getSelectedItem()
-									.toString());
+							obj.put("mStatus", comboMarSts.getSelectedItem().toString());
 							obj.put("eid", txtEid.getText());
 							obj.put("occupation", txtO.getText());
 							obj.put("Address", txtaAdd1.getText());
-
+                       
 							System.out.println(obj);
+							sc.PostData(obj, "http://localhost:8080/Server/Test");
 						} else {
-							throw new RuntimeException(
-									"E-mail address is not right!");
+							throw new RuntimeException("E-mail address is not right!");
 						}
 					}
 				}
 
 				catch (RuntimeException e5) {
-					JOptionPane.showMessageDialog(null, e5, "Error",
-							JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, e5, "Error", JOptionPane.ERROR_MESSAGE);
 
 				} catch (Exception e1) {
 					System.out.println("Exception caught:" + e1);
@@ -375,6 +348,7 @@ public class PatientInfo extends JFrame {
 			}
 
 		});
+
 	}
 
 }

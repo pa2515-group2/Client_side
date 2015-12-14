@@ -37,8 +37,8 @@ import com.toedter.calendar.JDateChooser;
 @SuppressWarnings("unused")
 public class Doctors_info extends JFrame {
 
-	public String[] profession = { "Surgeon", "Neurologist", "Physician",
-			"Dermatologist", "Gynecologist", "Radiologist" };
+	public String[] profession = { "Surgeon", "Neurologist", "Physician", "Dermatologist", "Gynecologist",
+			"Radiologist" };
 	public String[] gender = { "Male", "Female" };
 	public String firstname, lastname, qualification, experience, age;
 
@@ -73,6 +73,7 @@ public class Doctors_info extends JFrame {
 	 * Create the frame.
 	 */
 	public Doctors_info() {
+		final ServerCode sc=new ServerCode();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -90,16 +91,13 @@ public class Doctors_info extends JFrame {
 					qualification = textField_2.getText();
 					experience = textField_3.getText();
 
-					SimpleDateFormat dateformat = new SimpleDateFormat(
-							"dd/MM/yyyy");
+					SimpleDateFormat dateformat = new SimpleDateFormat("dd/MM/yyyy");
 					Date d = dateChooser.getDate();
 
 					// If date is not given throw an exception to the user
-					if (firstname.equals("") || lastname.equals("")
-							|| qualification.equals("")
-							|| experience.equals("") || d == null)
-						throw new RuntimeException(
-								"Enter the missing informations!");
+					if (firstname.equals("") || lastname.equals("") || qualification.equals("") || experience.equals("")
+							|| d == null)
+						throw new RuntimeException("Enter the missing informations!");
 
 					else {
 						age = dateformat.format(d);
@@ -113,23 +111,17 @@ public class Doctors_info extends JFrame {
 						obj.put("qualification", qualification);
 						obj.put("experience", experience);
 						obj.put("age", age);
-						obj.put("gender", comboBox_1.getSelectedItem()
-								.toString());
-						obj.put("profession", comboBox.getSelectedItem()
-								.toString());
+						obj.put("gender", comboBox_1.getSelectedItem().toString());
+						obj.put("profession", comboBox.getSelectedItem().toString());
 
 						// Printing JSON object in string format for testing
-						StringWriter out = new StringWriter();
-						obj.writeJSONString(out);
-
-						String jsonText = out.toString();
-						System.out.print(jsonText);
+						System.out.println(obj);
+						sc.PostData(obj, "http://localhost:8080/Server/Test");
 					}
 				}
 
 				catch (RuntimeException e5) {
-					JOptionPane.showMessageDialog(null, e5, "Error",
-							JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, e5, "Error", JOptionPane.ERROR_MESSAGE);
 
 				} catch (Exception e1) {
 					System.out.println("Exception caught:" + e1);
@@ -165,8 +157,7 @@ public class Doctors_info extends JFrame {
 		textField.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
 				char c = e.getKeyChar();
-				if (((c < 'A') || (c > 'Z')) && ((c < 'a') || (c > 'z'))
-						&& (c != KeyEvent.VK_BACK_SPACE)) {
+				if (((c < 'A') || (c > 'Z')) && ((c < 'a') || (c > 'z')) && (c != KeyEvent.VK_BACK_SPACE)) {
 					e.consume();
 					getToolkit().beep();
 				}
@@ -190,8 +181,7 @@ public class Doctors_info extends JFrame {
 		textField_1.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
 				char c = e.getKeyChar();
-				if (((c < 'A') || (c > 'Z')) && ((c < 'a') || (c > 'z'))
-						&& (c != KeyEvent.VK_BACK_SPACE)) {
+				if (((c < 'A') || (c > 'Z')) && ((c < 'a') || (c > 'z')) && (c != KeyEvent.VK_BACK_SPACE)) {
 					e.consume();
 					getToolkit().beep();
 				}
@@ -219,8 +209,7 @@ public class Doctors_info extends JFrame {
 		textField_2.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
 				char c = e.getKeyChar();
-				if (((c < 'A') || (c > 'Z')) && ((c < 'a') || (c > 'z'))
-						&& (c != KeyEvent.VK_BACK_SPACE)) {
+				if (((c < 'A') || (c > 'Z')) && ((c < 'a') || (c > 'z')) && (c != KeyEvent.VK_BACK_SPACE)) {
 					e.consume();
 					getToolkit().beep();
 				}
