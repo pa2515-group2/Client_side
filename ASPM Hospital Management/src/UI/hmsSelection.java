@@ -49,11 +49,11 @@ public class hmsSelection extends JFrame {
 					// book an appointment
 					break;
 				case 1:
-					UI.registerPatient i = new UI.registerPatient();
+					UI.PatientInfo i = new UI.PatientInfo();
 					i.setVisible(true);
 					break;
 				case 2:
-					UI.registerDoctor frame = new UI.registerDoctor();
+					UI.Doctors_info frame = new UI.Doctors_info();
 					frame.setVisible(true);
 					break;
 				default:
