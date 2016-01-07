@@ -1,3 +1,4 @@
+package UI;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
@@ -6,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -47,12 +49,11 @@ public class hmsSelection extends JFrame {
 					// book an appointment
 					break;
 				case 1:
-					PatientInfo i = new PatientInfo();
+					UI.registerPatient i = new UI.registerPatient();
 					i.setVisible(true);
 					break;
 				case 2:
-					System.out.println("selected value " + selcVal);
-					Doctors_info frame = new Doctors_info();
+					UI.registerDoctor frame = new UI.registerDoctor();
 					frame.setVisible(true);
 					break;
 				default:
