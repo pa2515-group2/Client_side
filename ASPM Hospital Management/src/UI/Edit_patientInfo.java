@@ -45,7 +45,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.Object;
 
-public class PatientInfo extends JFrame {
+public class Edit_patientInfo extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtFN;
@@ -71,6 +71,8 @@ public class PatientInfo extends JFrame {
 	private JTextField textUse2;
 	public File xray;
 	public String imageDataString;
+	public String[] patient_IDs = {  };
+	
 	
 	public void getStringFromBitmap() {
 		try {			
@@ -127,10 +129,10 @@ public class PatientInfo extends JFrame {
 		 
 	
 	
-	public PatientInfo() {
+	public Edit_patientInfo() {
 		final ServerCode sc = new ServerCode();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 685, 647);
+		setBounds(100, 100, 665, 697);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -174,15 +176,15 @@ final FileFilter imageFilter = new FileNameExtensionFilter(
 			    }
 			}
 		});
-		btnFile.setBounds(196, 574, 126, 23);
+		btnFile.setBounds(177, 574, 126, 23);
 		contentPane.add(btnFile);
 	   
 
 		
 		
 	 
-		JButton btnSend = new JButton("Submit");
-		btnSend.setBounds(497, 574, 106, 22);
+		JButton btnSend = new JButton("Edit");
+		btnSend.setBounds(365, 574, 106, 22);
 		contentPane.add(btnSend);
 
 		lblFirstName = new JLabel("First Name");
@@ -471,6 +473,19 @@ final FileFilter imageFilter = new FileNameExtensionFilter(
 		JLabel label_4 = new JLabel("Information:");
 		label_4.setBounds(356, 475, 71, 14);
 		contentPane.add(label_4);
+		
+		JButton btnDelete = new JButton("Delete");
+		btnDelete.setBounds(365, 607, 106, 23);
+		contentPane.add(btnDelete);
+		
+		JComboBox patientIDs = new JComboBox(patient_IDs);
+		patientIDs.setBounds(497, 574, 106, 20);
+		contentPane.add(patientIDs);
+		
+		
+		JButton btnNewButton = new JButton("Show patient");
+		btnNewButton.setBounds(497, 605, 106, 23);
+		contentPane.add(btnNewButton);
 
 		btnSend.addActionListener(new ActionListener() {
 			@SuppressWarnings("unchecked")

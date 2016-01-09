@@ -39,11 +39,12 @@ import com.toedter.calendar.JDateChooser;
 import UI.ServerCode;
 
 @SuppressWarnings("unused")
-public class Doctors_info extends JFrame {
+public class Edit_doctors_info extends JFrame {
 
 	public String[] profession = { "Surgeon", "Neurologist", "Physician",
 			"Dermatologist", "Gynecologist", "Radiologist" };
 	public String[] gender = { "Male", "Female" };
+	public String[] doctor_IDs = {  };
 	public String firstname, lastname, qualification, experience, age;
 
 	private static JTextField textField;
@@ -55,6 +56,7 @@ public class Doctors_info extends JFrame {
 	JDateChooser dateChooser = new JDateChooser();
 	JComboBox comboBox_1 = new JComboBox(gender);
 	JComboBox comboBox = new JComboBox(profession);
+	JComboBox doctorIDs = new JComboBox(doctor_IDs);
 
 	/**
 	 * Launch the application.
@@ -76,7 +78,7 @@ public class Doctors_info extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Doctors_info() {
+	public Edit_doctors_info() {
 		final ServerCode sc = new ServerCode();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 380, 310);
@@ -85,7 +87,7 @@ public class Doctors_info extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JButton btnNewButton = new JButton("Submit");
+		JButton btnNewButton = new JButton("Edit");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -263,5 +265,17 @@ public class Doctors_info extends JFrame {
 		JLabel lblage = new JLabel("Birth Date");
 		lblage.setBounds(10, 177, 67, 14);
 		contentPane.add(lblage);
+		
+		JButton btnDelete = new JButton("Delete");
+		btnDelete.setBounds(141, 234, 89, 23);
+		contentPane.add(btnDelete);
+		
+		JComboBox doctorIDs = new JComboBox();
+		doctorIDs.setBounds(238, 150, 115, 20);
+		contentPane.add(doctorIDs);
+		
+		JButton btnShowDoctor = new JButton("Show doctor");
+		btnShowDoctor.setBounds(238, 185, 115, 23);
+		contentPane.add(btnShowDoctor);
 	}
 }

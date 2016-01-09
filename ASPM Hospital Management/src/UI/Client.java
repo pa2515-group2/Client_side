@@ -11,7 +11,7 @@ public class Client {
 
 		/*
 		 * //Doctors_info frame = new Doctors_info(); //frame.setVisible(true);
-		 */ System.out.println("auefbaywebf");
+		 */ System.out.println(":) :) :) :) :)");
 	}
 
 }

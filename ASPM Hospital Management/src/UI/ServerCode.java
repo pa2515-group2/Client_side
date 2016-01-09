@@ -14,7 +14,7 @@ import org.json.simple.JSONObject;
 
 public class ServerCode {
 	public ServerCode(){
-		System.out.println("executing server code");
+		System.out.println("Executing server code...");
 	}
 	public void PostData(JSONObject json, String url) {
 		CloseableHttpClient client = HttpClients.createDefault();
@@ -32,7 +32,7 @@ public class ServerCode {
 			String responseString;
 			responseString = EntityUtils.toString(en, "UTF-8");
 			System.out.println(responseString);
-			System.out.println("response:" + response.getStatusLine().getStatusCode());
+			System.out.println("Response:" + response.getStatusLine().getStatusCode());
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
