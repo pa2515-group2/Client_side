@@ -127,7 +127,7 @@ public class discharge extends JFrame{
 							
 							System.out.println(obj);
 							sc.PostData(obj,
-									"http://localhost:8080/Server/Test");
+									"http://localhost:8080/Server/Test","discharge","Manager");
 					}
 				}
 

@@ -124,7 +124,7 @@ public class Doctors_info extends JFrame {
 
 						// Printing JSON object in string format for testing
 						System.out.println(obj);
-						sc.PostData(obj, "http://localhost:8080/Server/Test");
+						sc.PostData(obj, "http://localhost:8080/Server/Test","Doctors_info","Manager");
 					}
 				}
 

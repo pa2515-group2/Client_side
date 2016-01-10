@@ -20,9 +20,6 @@ public class ServerCode {
 		System.out.println("Executing server code...");
 	}
 
-	public void PostData(JSONObject json, String url) {
-	}
-
 	public int PostData(JSONObject json, String url, String callFun, String headerData) {
 		CloseableHttpClient client = HttpClients.createDefault();
 		HttpPost httpPost = new HttpPost(url);
