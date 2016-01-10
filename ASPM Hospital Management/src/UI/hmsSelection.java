@@ -48,6 +48,7 @@ public class hmsSelection extends JFrame {
 
 				switch (selcVal) {
 				case 0:
+					
 					UI.Book_app frame = new UI.Book_app();
 					frame.setVisible(true);
 					break;
@@ -94,7 +95,7 @@ public class hmsSelection extends JFrame {
 		
 		else if(s == "Doctor"){
 		final JComboBox comboBox = new JComboBox(
-				new String[] { "Book an appointment", "Add a patient", "See/Edit/Delete patient", "See/Edit/Delete appointment" });
+				new String[] { "See/Edit/Delete patient", "See/Edit/Delete appointment" });
 		comboBox.setBounds(164, 29, 155, 23);
 		contentPane.add(comboBox);
 		
@@ -108,19 +109,11 @@ public class hmsSelection extends JFrame {
 
 				switch (selcVal) {
 				case 0:
-					UI.Book_app frame = new UI.Book_app();
-					frame.setVisible(true);
-					break;
-				case 1:
-					UI.PatientInfo frame2 = new UI.PatientInfo();
-					frame2.setVisible(true);
-					break;
-				case 2:
 					UI.Edit_patientInfo frame6 = new UI.Edit_patientInfo();
 					frame6.setVisible(true);
 					break;
-				case 3:
-					UI.Edit_appointment frame7 = new UI.Edit_appointment();
+				case 1:
+					DocViewAppointments frame7=new DocViewAppointments();
 					frame7.setVisible(true);
 					break;
 

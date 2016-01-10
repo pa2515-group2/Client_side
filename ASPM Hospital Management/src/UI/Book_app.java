@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -21,6 +22,8 @@ import com.toedter.calendar.JDateChooser;
 import javax.swing.JRadioButton;
 
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 
 public class Book_app extends JFrame{
@@ -31,7 +34,7 @@ public class Book_app extends JFrame{
 	public JDateChooser dateChooser;
 	public JRadioButton radioButton_3;
 	public String doctorID, patientID, description, day;
-	
+	final JRadioButton radioButton[]=new JRadioButton[10];
 	public Book_app() {
 		final ServerCode sc = new ServerCode();
 		getContentPane().setLayout(null);
@@ -42,6 +45,7 @@ public class Book_app extends JFrame{
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		getContentPane().setLayout(null);
+		
 		
 		JLabel lblNewLabel = new JLabel("Doctor ID");
 		lblNewLabel.setBounds(10, 11, 46, 14);
@@ -78,88 +82,22 @@ public class Book_app extends JFrame{
 		getContentPane().add(desc);
 		desc.setColumns(10);
 		
-		ButtonGroup bg2 = new ButtonGroup();
+     		
 		
-		final JRadioButton radioButton = new JRadioButton("09:00");
-		radioButton.setBounds(10, 198, 64, 23);
-		getContentPane().add(radioButton);
-		radioButton.setActionCommand("09:00");
-		
-		final JRadioButton radioButton_1 = new JRadioButton("10:00");
-		radioButton_1.setBounds(73, 198, 64, 23);
-		getContentPane().add(radioButton_1);
-		radioButton_1.setActionCommand("10:00");
-		
-		final JRadioButton radioButton_2 = new JRadioButton("11:00");
-		radioButton_2.setBounds(139, 198, 64, 23);
-		getContentPane().add(radioButton_2);
-		radioButton_2.setActionCommand("11:00");
-		
-		final JRadioButton radioButton_3 = new JRadioButton("12:00");
-		radioButton_3.setSelected(true);
-		radioButton_3.setBounds(205, 198, 64, 23);
-		getContentPane().add(radioButton_3);
-		radioButton_3.setActionCommand("12:00");
-		
-		final JRadioButton radioButton_4 = new JRadioButton("13:00");
-		radioButton_4.setBounds(271, 198, 64, 23);
-		getContentPane().add(radioButton_4);
-		radioButton_4.setActionCommand("13:00");
-		
-		final JRadioButton radioButton_5 = new JRadioButton("17:00");
-		radioButton_5.setBounds(10, 224, 64, 23);
-		getContentPane().add(radioButton_5);
-		radioButton_5.setActionCommand("17:00");
-		
-		final JRadioButton radioButton_6 = new JRadioButton("18:00");
-		radioButton_6.setBounds(73, 224, 64, 23);
-		getContentPane().add(radioButton_6);
-		radioButton_6.setActionCommand("18:00");
-		
-		final JRadioButton radioButton_7 = new JRadioButton("19:00");
-		radioButton_7.setBounds(139, 224, 64, 23);
-		getContentPane().add(radioButton_7);
-		radioButton_7.setActionCommand("19:00");
-		
-		final JRadioButton radioButton_8 = new JRadioButton("20:00");
-		radioButton_8.setBounds(205, 224, 64, 23);
-		getContentPane().add(radioButton_8);
-		radioButton_8.setActionCommand("20:00");
-		
-		final JRadioButton radioButton_9 = new JRadioButton("21:00");
-		radioButton_9.setBounds(271, 224, 64, 23);
-		getContentPane().add(radioButton_9);
-		radioButton_9.setActionCommand("21:00");
-		
-		bg2.add(radioButton);
-		bg2.add(radioButton_1);
-		bg2.add(radioButton_2);
-		bg2.add(radioButton_3);
-		bg2.add(radioButton_4);
-		bg2.add(radioButton_5);
-		bg2.add(radioButton_6);
-		bg2.add(radioButton_7);
-		bg2.add(radioButton_8);
-		bg2.add(radioButton_9);
-		
-		JButton btnSubmit = new JButton("Submit");
-		btnSubmit.setBounds(10, 277, 89, 23);
+		final JButton btnSubmit = new JButton("Submit");
+		btnSubmit.setBounds(10, 198, 89, 23);
 		contentPane.add(btnSubmit);
 		
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				try {
-					// Getting the values written in text fields
 					doctorID = docID.getText();
 					patientID = patID.getText();
 					description = desc.getText();
-					
-
-					SimpleDateFormat dateformat = new SimpleDateFormat(
-							"dd/MM/yyyy");
+					SimpleDateFormat dateformat = new SimpleDateFormat("dd/MM/yyyy");
 					Date d = dateChooser.getDate();
-
+                    //System.out.println("info: \n"+" did= "+doctorID+" pid= "+patientID+" dsec: "+description+" date: "+d);
 					// If date is not given throw an exception to the user
 					if (doctorID.equals("") || patientID.equals("")
 							|| description.equals("")
@@ -168,47 +106,23 @@ public class Book_app extends JFrame{
 
 					else {
 						day = dateformat.format(d);
-						//System.out.println(age);
-
-						// Encoding values into a JSON object
 						JSONObject obj = new JSONObject();
-
 						obj.put("doctorid", doctorID);
 						obj.put("patientid", patientID);
 						obj.put("day", day);
-						if (radioButton.isSelected())
-							obj.put("datetimeslot", radioButton.getActionCommand());
-						else if (radioButton_1.isSelected())
-							obj.put("datetimeslot",
-									radioButton_1.getActionCommand());
-						else if (radioButton_2.isSelected())
-							obj.put("datetimeslot",
-									radioButton_2.getActionCommand());
-						else if (radioButton_3.isSelected())
-							obj.put("datetimeslot",
-									radioButton_3.getActionCommand());
-						else if (radioButton_4.isSelected())
-							obj.put("datetimeslot",
-									radioButton_4.getActionCommand());
-						else if (radioButton_5.isSelected())
-							obj.put("datetimeslot",
-									radioButton_5.getActionCommand());
-						else if (radioButton_6.isSelected())
-							obj.put("datetimeslot",
-									radioButton_6.getActionCommand());
-						else if (radioButton_7.isSelected())
-							obj.put("datetimeslot",
-									radioButton_7.getActionCommand());
-						else if (radioButton_8.isSelected())
-							obj.put("datetimeslot",
-									radioButton_8.getActionCommand());
-						else if (radioButton_9.isSelected())
-							obj.put("datetimeslot",
-									radioButton_9.getActionCommand());
-
-						// Printing JSON object in string format for testing
-						System.out.println(obj);
-						sc.PostData(obj, "http://localhost:8080/Server/Test");
+						for(JRadioButton rb: radioButton)
+						{
+							if(rb.isSelected())
+								obj.put("datetimeslot", rb.getActionCommand());
+						}
+						int res=sc.PostData(obj, "http://localhost:8080/Server/Test","Book_app","Manager");
+						if(res!=0)
+						{JOptionPane.showMessageDialog(getParent(),
+								"sucessfull");
+						dispose();
+						UI.Book_app frame = new UI.Book_app();
+						frame.setVisible(true);
+						}
 					}
 				}
 
@@ -227,9 +141,13 @@ public class Book_app extends JFrame{
 			}
 		});
 		
-		JButton btnReset = new JButton("Reset");
-		btnReset.setBounds(246, 277, 89, 23);
+		
+		
+		final JButton btnReset = new JButton("Reset");
+		btnReset.setBounds(100, 198, 89, 23);
 		contentPane.add(btnReset);
+		
+		
 		
 		btnReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -242,6 +160,46 @@ public class Book_app extends JFrame{
 			}
 		});
 		
+		final ButtonGroup bg2 = new ButtonGroup();
+		JButton btnCheck = new JButton("check");
+		btnCheck.setBounds(205, 65, 89, 23);
+		btnCheck.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String responseSting=sc.getData("http://localhost:8080/Server/Test");
+				JSONParser par = new JSONParser();
+				
+				JSONObject jsonChildObject;
+				try {
+					JSONObject response = (JSONObject) par.parse(/*response string*/"{\"1300\":\"1\",\"1430\":\"1\",\"1500\":\"1\",\"1600\":\"1\",\"1700\":\"1\",\"1800\":\"1\"}");
+					int i=0,x=10,y=198;
+					for (Object key : response.keySet()) {
+				        String keyStr = (String)key;
+				        Object keyvalue = response.get(keyStr);
+					    if(keyvalue.equals("1"))
+					    {
+					    	radioButton[i] = new JRadioButton(keyStr);					    		
+					    	if(i>4)
+						    	{System.out.println("nfjennjanefjwnaiwnfajrnhbvyrbajvgwdv");
+					    		y=224;x=10;}
+					    	radioButton[i].setBounds(x, y, 64, 23);
+					    	getContentPane().add(radioButton[i]);
+					    	bg2.add(radioButton[i]);
+							x=x+59;
+					    	i++;
+					    }
+ 					} 
+				} catch (ParseException e1) {
+					
+					e1.printStackTrace();
+				}
+				btnSubmit.setBounds(10, 277, 89, 23);
+				btnReset.setBounds(246, 277, 89, 23);
+			}
+			
+		});
+		contentPane.add(btnCheck);
 		
 		
 	}
